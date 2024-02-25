@@ -2,9 +2,9 @@
 # print 10 times Holberton School using while loop
 
 
-i=1
-while [$i -le 10]
-do
-	echo "Holberton School"
-	((i++)
+count=0
+
+while [ $count -lt 10 ]; do
+  echo "Best School"
+  count=$((count + 1))
 done
