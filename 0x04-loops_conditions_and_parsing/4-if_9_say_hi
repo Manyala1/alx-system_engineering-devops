@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# print best school 10 times using wile loop
+# but for 9th iteration, display Holberton School and then Hi
+
+i=1
+while [ $i -le 10 ]
+do
+    echo "Holberton School"
+    if [ "$i" -eq 9 ]
+    then
+	echo "Hi"
+    fi
+
+    ((i++))
+done
