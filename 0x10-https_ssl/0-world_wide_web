@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Function to display subdomain information
+display_info() {
+  local subdomain="$1"
+  local record_type=$(dig +short -t A "$subdomain.$domain")
+  if [[ -n "$record_type" ]]; then
+    destination="$record_type"
+    record_type="A"
+  else
+    record_type=$(dig +short -t CNAME "$subdomain.$domain")
+    if [[ -n "$record_type" ]]; then
+      destination="$record_type"
+    else
+      destination="Not Found"
+    fi
+  fi
+  if [[ "$subdomain" == "" ]]; then
+    subdomain="@"
+  fi
+  echo "The subdomain $subdomain is a $record_type record and points to $destination"
+}
+
+# Get domain and subdomain arguments
+domain="$1"
+subdomain="$2"
+
+# Validate mandatory domain argument
+if [[ -z "$domain" ]]; then
+  echo "Error: Please provide a domain name as the first argument."
+  exit 1
+fi
+
+# Display information for specific subdomain if provided
+if [[ -n "$subdomain" ]]; then
+  display_info "$subdomain"
+  exit 0
+fi
+
+# Display information for specified subdomains
+display_info "www"
+display_info "lb-01"
+display_info "web-01"
+display_info "web-02"
+
+# Ignore shellcheck SC2086 warning
+# shellcheck disable SC2086
+
