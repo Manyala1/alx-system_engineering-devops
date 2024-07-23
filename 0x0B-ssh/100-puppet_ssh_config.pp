@@ -7,5 +7,5 @@ content =>"
 	host*
 	Identity ~/.ssh/school
 	PasswordAuthentication no
-	"
+	",
 }
