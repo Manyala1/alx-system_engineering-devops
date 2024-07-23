@@ -6,5 +6,6 @@ content =>"
 	SSH client configuaration
 	host*
 	Identity ~/.ssh/school
-	PasswordAuthentication no"
+	PasswordAuthentication no
+	"
 }
