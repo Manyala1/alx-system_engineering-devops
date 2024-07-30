@@ -7,17 +7,19 @@ import csv
 import requests
 import sys
 
-def fetch_employee_todo_progress(employee_id):
-    base_url = "https://jsonplaceholder.typicode.com"
-    user = requests.get(f"{base_url}/users/{employee_id}").json()
-    username = user.get('username')
+if __name__ == "__main__":
+    url = "https://jsonplaceholder.typicode.com/"
+    
+    user_id = sys.argv[1]
+    user_resource = requests.get(url + "users/{}".format(user_id))
+    user = user_response.json()
+    username = user.get("username")
+    params = {"userId": user_id}
+    todos_response = requests.get(url + "todos", params=params)
+    todos = todos_response.json()
 
-    todos = requests.get(f"{base_url}/todos", params={'userId': employee_id}).json()
-    filename = f"{employee_id}.csv"
-    with open(filename, mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
-        for todo in todos:
-            writer.writerow([employee_id, username, todo['completed'], todo['title']])
+    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
+            writer = csv.writer(csvfile. quoting=CSV.QUOTE_ALL)
 
-            print(f"Data for employee {username} (ID: {employee_id}) has been written to {filename}")
+            for todo in todos:
+                writer.writerow([user_id, username, todo.get("completed"), todo.get("title")])
